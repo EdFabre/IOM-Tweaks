@@ -4,7 +4,7 @@ import static meridor.MConst.*;
 
 /**
  * The class that contains the features of player and enemy neopets
- * This class also handles combat calculations
+ * This class  also handles combat calculations
  */
 public class MeriPet implements Serializable {
 	/**
