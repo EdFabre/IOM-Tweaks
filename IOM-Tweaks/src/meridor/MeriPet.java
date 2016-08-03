@@ -12,8 +12,8 @@ public class MeriPet implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	final static int []STATCAPS={18,18,14};
-	final static int []STATCAPS2={21,19,14};
+	final static int []STATCAPS={25,25,15};
+	final static int []STATCAPS2={30,30,15};
 	final static int[] CAMPAIGNS[]={STATCAPS,STATCAPS2};
 	final static String [] RANKS={
 			"Villager",
@@ -87,9 +87,12 @@ public class MeriPet implements Serializable {
 		telesealed=false;
 
 		for (int i=0;i<stats.length;i++){
+			/*stats[i]=10;*/
+			
+			
 			stats[i]=Math.min(
 					STATCAPS[i],
-					species.basestats[i]+random.nextInt(5)
+					species.basestats[i]+random.nextInt( 5)
 			);
 		}
 	}
@@ -185,7 +188,7 @@ public class MeriPet implements Serializable {
 	 * The passed int is the campaignID; reference it for limits on stats if rank up
 	 * Only one promotion per mission; ranking up tells a pet that it has been promoted,
 	 * which needs to be reset
-	 * Increases saves by 1 (rank is dynamically calc'd based on saves)
+	 * Increases saves by 3 (rank is dynamically calc'd based on saves)
 	 */
 	public void gainSave(int campaign){
 		if (!promoted){
@@ -461,8 +464,8 @@ public class MeriPet implements Serializable {
 		int damage = getASbonus(a.stats[ATK])+a.getWeaponBonus()+roll;
 		int net = Math.max(0, damage-d.getTotalArmor());
 		if (net>0){
-			net=Math.max(net, MConst.getEquipMinDmg(a.weapon));
-		}
+			net=Math.max(net, MConst.getEquipMinDmg(a.weapon)+net);
+		} 
 		String battlelog=a.name+" attacked "+d.name+" for "+damage+
 				", dealing "+net+" total! (Rolled "+roll+")";
 		System.out.println(battlelog); //placeholder?

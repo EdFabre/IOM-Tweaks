@@ -196,6 +196,7 @@ public class Campaign implements Serializable {
 	public void setAllies(ArrayList<MeriPet> nallies){
 		allies=nallies;
 	}
+	
 	/**
 	 * return a clone of the current list so that it can be altered
 	 * without altering the instanced meripets active in the current battle
