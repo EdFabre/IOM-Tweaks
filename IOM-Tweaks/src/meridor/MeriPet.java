@@ -26,11 +26,11 @@ public class MeriPet implements Serializable {
 	final static int[]RANKREQS={3,9,32,64,96}; //the saves needed to get to each rank (listed above)
 	
 	final static Species [] SPEC ={
-			new Species (MOEHOG,"Moehog",3,15,8,8),
-			new Species (SKEITH,"Skeith",1,15,15,8),
-			new Species (TECHO,"Techo",2,15,8,8),
-			new Species (SCORCH,"Scorchio",2,15,10,8),
-			new Species (GRUNDO,"Grundo",2,15,10,8),
+			new Species (MOEHOG,"Moehog",3,17,12,10),
+			new Species (SKEITH,"Skeith",1,20,17,10),
+			new Species (TECHO,"Techo",2,17,10,10),
+			new Species (SCORCH,"Scorchio",2,17,12,10),
+			new Species (GRUNDO,"Grundo",2,17,12,10),
 			
 			new Species (D_MOE,"Draco Moehog",3,15,8,9),
 			new Species (D_SKE,"Draco Skeith",1,15,15,9),
@@ -49,7 +49,7 @@ public class MeriPet implements Serializable {
 	
 	String name;
 	final Species species; //contains racial information for the pet
-	int[] stats={10,5,5}; //contains current base stats
+	int[] stats={15,10,7}; //contains current base stats
 	int dmg; //current damage taken by the pet
 //	int rank; //the current level of the npet, max is 5
 	int saves; //the stat for experience
@@ -92,7 +92,7 @@ public class MeriPet implements Serializable {
 			
 			stats[i]=Math.min(
 					STATCAPS[i],
-					species.basestats[i]+random.nextInt( 5)
+					species.basestats[i]+random.nextInt(10)
 			);
 		}
 	}
@@ -465,9 +465,19 @@ public class MeriPet implements Serializable {
 		int net = Math.max(0, damage-d.getTotalArmor());
 		if (net>0){
 			net=Math.max(net, MConst.getEquipMinDmg(a.weapon)+net);
-		} 
+		} else {
+			if (a.species.spid < 5) {
+				net=5;
+			}
+		}
+		
 		String battlelog=a.name+" attacked "+d.name+" for "+damage+
 				", dealing "+net+" total! (Rolled "+roll+")";
+		if (a.species.spid < 5) {
+			battlelog=battlelog+" Hey I am Ally";
+		} else {
+			battlelog=battlelog+" Hey I am Enemy";
+		}
 		System.out.println(battlelog); //placeholder?
 		d.injure(net);
 		return battlelog;
