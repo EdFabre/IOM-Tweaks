@@ -467,7 +467,11 @@ public class MeriPet implements Serializable {
 			net=Math.max(net, MConst.getEquipMinDmg(a.weapon)+net);
 		} else {
 			if (a.species.spid < 5) {
+<<<<<<< HEAD
 				d.stats[DEF]--;
+=======
+				net=5;
+>>>>>>> branch 'master' of git@github.com:EdFabre/IOM-Tweaks.git
 			}
 		}
 		
